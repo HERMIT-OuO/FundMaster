@@ -1,4 +1,4 @@
-# fund
+# FundMaster
 
 ## Project setup
 ```

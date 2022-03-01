@@ -14,7 +14,7 @@
         </div>
         <el-row :gutter="24">
             <el-col v-for="(item,index) in funds" :key="index" :span="6">
-                <el-card shadow="hover">
+                <el-card @click="goDetail(item.code)" shadow="hover">
                     <div class="fund-title">
                         <span class="fund-title-name">{{ item.name }}</span>
                         <span class="fund-title-code">[{{ item.code }}]</span>
@@ -47,17 +47,24 @@
 
 <script lang='ts'>
 import { reactive, toRefs, onBeforeMount, onMounted, computed } from "vue";
-import { getAllFund, getFundDetail  } from "@/api/fund";
+import { getAllFund, getFundDetail, fund } from "@/api/fund";
+import { getAllFunds, setAllFunds} from "@/utils/doStorage";
+import { useRouter } from "vue-router";
+import 'element-plus/es/components/message/style/css'
 import { ElMessage } from 'element-plus'
+
 interface DataProps {
     funds: any[];
     inputFund: string;
+    stroage: any[];
 }
 export default {
     name: "AllFunds",
     setup() {
+        const router = useRouter();
         const data: DataProps = reactive({
             funds: [],
+            stroage: [],
             inputFund: "",
         });
         const upOrDown = (num: number) => {
@@ -92,22 +99,41 @@ export default {
             const _data = {
                 code: data.inputFund,
             };
-
             getFundDetail(_data).then((res: any) => {
                 if (res.code === 200) {
                     console.log(res);
                     data.funds.push(res.data);
+                    data.stroage.push(res.data.code)
+                    setAllFunds(data.stroage);
                 }else {
-                    ElMessage({
-                        message: 'res.msg',
-                        type: 'error'
-                    })
+                    ElMessage.error(res.message)
                 }
             });
 
         };
+        const goDetail = (item: any) => {
+            router.push({
+                path: "/funddetail",
+                query: {
+                    fundCode: item,
+                },
+            });
+        };
         onBeforeMount(() => {});
-        onMounted(() => {});
+        onMounted(() => {
+            // 获取所有基金
+            const _data = getAllFunds();
+            if (_data) {
+                data.stroage = _data;
+                const request = { code: data.stroage.toString() }
+                fund(request).then((res: any) => {
+                    if (res.code === 200) {
+                        data.funds = res.data;
+                        console.log(res);
+                    }
+                })
+            }
+        });
         const refData = toRefs(data);
         return {
             ...refData,
@@ -115,6 +141,7 @@ export default {
             querySearchAsync,
             handleSelect,
             handleAdd,
+            goDetail
         };
     },
 };

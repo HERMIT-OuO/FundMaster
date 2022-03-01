@@ -1,12 +1,6 @@
 <!--  -->
 <template>
-    <div class="home">
-        <div class="home-panel">
-            <!-- <el-input v-model="fund" placeholder="Please input" />
-            <el-button type="primary" @click="handleClick">提交</el-button> -->
-            <all-funds />
-        </div>
-    </div>
+    <all-funds />
 </template>
 
 <script lang='ts'>
@@ -16,7 +10,7 @@ interface DataProps {
     fund: string;
 }
 export default {
-    name: "",
+    name: "Home",
     components: {
         AllFunds,
     },
@@ -40,13 +34,23 @@ export default {
     justify-content: center;
     align-items: center;
 }
+
+.home-title {
+    margin-bottom: 5rem;
+
+    font-size: 32px;
+    font-weight: bold;
+    
+    text-align: center;
+}
+
 .home-panel {
-    display: flex;
+    /* display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
 
     position: absolute;
-    top: 20%;
+    top: 15%;
 
     width: 80%;
 }
