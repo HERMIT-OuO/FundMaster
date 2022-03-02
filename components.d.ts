@@ -8,9 +8,12 @@ declare module 'vue' {
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCard: typeof import('element-plus/es')['ElCard']
     ElCol: typeof import('element-plus/es')['ElCol']
+    ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']
+    ElDatePicker: typeof import('element-plus/es')['ElDatePicker']
     ElInput: typeof import('element-plus/es')['ElInput']
     ElRow: typeof import('element-plus/es')['ElRow']
     FundBar: typeof import('./src/components/FundBar.vue')['default']
+    FundChart: typeof import('./src/components/FundChart.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
   }
 }

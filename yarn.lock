@@ -2984,6 +2984,14 @@ easy-stack@^1.0.1:
   resolved "https://registry.npmmirror.com/easy-stack/-/easy-stack-1.0.1.tgz#8afe4264626988cabb11f3c704ccd0c835411066"
   integrity sha512-wK2sCs4feiiJeFXn3zvY0p41mdU5VUgbgs1rNsc/y5ngFUijdWd+iIN8eoyuZHKB8xN6BL4PdWmzqFmxNg6V2w==
 
+echarts@^5.3.0:
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/echarts/-/echarts-5.3.0.tgz#39342fcf0f763413fecd9d2afd1c415163de694d"
+  integrity sha512-zENufmwFE6WjM+24tW3xQq4ICqQtI0CGj4bDVDNd3BK3LtaA/5wBp+64ykIyKy3QElz0cieKqSYP4FX9Lv9MwQ==
+  dependencies:
+    tslib "2.3.0"
+    zrender "5.3.0"
+
 ee-first@1.1.1:
   version "1.1.1"
   resolved "https://registry.npmmirror.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
@@ -4491,6 +4499,11 @@ module-alias@^2.2.2:
   resolved "https://registry.npmmirror.com/module-alias/-/module-alias-2.2.2.tgz#151cdcecc24e25739ff0aa6e51e1c5716974c0e0"
   integrity sha512-A/78XjoX2EmNvppVWEhM2oGk3x4lLxnkEA4jTbaK97QKSDjkIoOsKQlfylt/d3kKKi596Qy3NP5XrXJ6fZIC9Q==
 
+moment@^2.29.1:
+  version "2.29.1"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.1.tgz#b2be769fa31940be9eeea6469c075e35006fa3d3"
+  integrity sha512-kHmoybcPV8Sqy59DwNDY3Jefr64lK/by/da0ViFcuA4DH0vQg5Q6Ze5VimxkfQNSC+Mls/Kx53s7TjP1RhFEDQ==
+
 mrmime@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmmirror.com/mrmime/-/mrmime-1.0.0.tgz#14d387f0585a5233d291baba339b063752a2398b"
@@ -5420,6 +5433,11 @@ requires-port@^1.0.0:
   resolved "https://registry.npmmirror.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
   integrity sha512-KigOCHcocU3XODJxsu8i/j8T9tzT4adHiecwORRQ0ZZFcp7ahwXuRU1m+yuO90C5ZUyGeGfocHDI14M3L3yDAQ==
 
+resize-detector@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/resize-detector/-/resize-detector-0.3.0.tgz#fe495112e184695500a8f51e0389f15774cb1cfc"
+  integrity sha512-R/tCuvuOHQ8o2boRP6vgx8hXCCy87H1eY9V5imBYeVNyNVpuL9ciReSccLj2gDcax9+2weXy3bc8Vv+NRXeEvQ==
+
 resolve-from@^4.0.0:
   version "4.0.0"
   resolved "https://registry.npmmirror.com/resolve-from/-/resolve-from-4.0.0.tgz#4abcd852ad32dd7baabfe9b40e00a36db5f392e6"
@@ -6061,6 +6079,11 @@ ts-loader@^9.2.5:
     micromatch "^4.0.0"
     semver "^7.3.4"
 
+tslib@2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.3.0.tgz#803b8cdab3e12ba581a4ca41c8839bbb0dacb09e"
+  integrity sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg==
+
 tslib@^1.8.1:
   version "1.14.1"
   resolved "https://registry.npmmirror.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
@@ -6226,10 +6249,18 @@ vary@~1.1.2:
   resolved "https://registry.npmmirror.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
   integrity sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==
 
-vue-demi@*:
+vue-demi@*, vue-demi@^0.12.1:
   version "0.12.1"
   resolved "https://registry.yarnpkg.com/vue-demi/-/vue-demi-0.12.1.tgz#f7e18efbecffd11ab069d1472d7a06e319b4174c"
   integrity sha512-QL3ny+wX8c6Xm1/EZylbgzdoDolye+VpCXRhI2hug9dJTP3OUJ3lmiKN3CsVV3mOJKwFi0nsstbgob0vG7aoIw==
+
+vue-echarts@^6.0.2:
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/vue-echarts/-/vue-echarts-6.0.2.tgz#f6d65c4b328d246da9060ded07b83556c1bef09b"
+  integrity sha512-9xDokauJtAc389MNKbwi1I0VDmp4Y6ndAJTQ8T9K7H0ffosTe1OJSJbUtkT7/fVLDFzlCcmg2TfAKaMzbpg5yQ==
+  dependencies:
+    resize-detector "^0.3.0"
+    vue-demi "^0.12.1"
 
 vue-eslint-parser@^8.0.0, vue-eslint-parser@^8.0.1:
   version "8.3.0"
@@ -6564,3 +6595,10 @@ yorkie@^2.0.0:
     is-ci "^1.0.10"
     normalize-path "^1.0.0"
     strip-indent "^2.0.0"
+
+zrender@5.3.0:
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/zrender/-/zrender-5.3.0.tgz#297c05dc2521362816c4ddced10a1e306646bbc8"
+  integrity sha512-Ln2QB5uqI1ftNYMtCRxd+XDq6MOttLgam2tmhKAVA+j0ko47UT+VNlDvKTkqe4K2sJhBvB0EhYNLebqlCTjatQ==
+  dependencies:
+    tslib "2.3.0"

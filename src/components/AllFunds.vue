@@ -14,7 +14,7 @@
         </div>
         <el-row :gutter="24">
             <el-col v-for="(item,index) in funds" :key="index" :span="6">
-                <el-card @click="goDetail(item.code)" shadow="hover">
+                <el-card class="fund-card" @click="goDetail(item.code)" shadow="hover">
                     <div class="fund-title">
                         <span class="fund-title-name">{{ item.name }}</span>
                         <span class="fund-title-code">[{{ item.code }}]</span>
@@ -105,8 +105,9 @@ export default {
                     data.funds.push(res.data);
                     data.stroage.push(res.data.code)
                     setAllFunds(data.stroage);
+                    ElMessage.success("添加成功");
                 }else {
-                    ElMessage.error(res.message)
+                    ElMessage.error(res.message);
                 }
             });
 
@@ -169,6 +170,10 @@ export default {
     width: 5rem;
 }
 
+.fund-card {
+    margin-bottom: 1rem;
+}
+
 .fund-title {
     margin-bottom: 1rem;
 
@@ -202,6 +207,6 @@ export default {
 }
 
 .down {
-    color: #0f0;
+    color: #008000;
 }
 </style>

@@ -5,7 +5,7 @@
 
 <script lang='ts'>
 import { reactive, toRefs, onBeforeMount, onMounted } from "vue";
-import AllFunds from '@/components/AllFunds.vue';
+import AllFunds from "@/components/AllFunds.vue";
 interface DataProps {
     fund: string;
 }
@@ -14,10 +14,10 @@ export default {
     components: {
         AllFunds,
     },
-    
-        AllFundssetup() {
+
+    setup() {
         const data: DataProps = reactive({
-            fund: ""
+            fund: "",
         });
         onBeforeMount(() => {});
         onMounted(() => {});
@@ -40,7 +40,7 @@ export default {
 
     font-size: 32px;
     font-weight: bold;
-    
+
     text-align: center;
 }
 
