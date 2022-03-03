@@ -21,7 +21,8 @@ import {
 import {
     GridComponent,
     TooltipComponent,
-    TitleComponent
+    TitleComponent,
+    VisualMapComponent 
 } from 'echarts/components'
 
 
@@ -30,7 +31,8 @@ use([
     LineChart,
     GridComponent,
     TooltipComponent,
-    TitleComponent
+    TitleComponent,
+    VisualMapComponent
 ])
 
 createApp(App).use(router).mount("#app");

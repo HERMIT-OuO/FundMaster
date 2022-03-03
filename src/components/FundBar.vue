@@ -126,12 +126,13 @@ export default {
 
 .fund-body {
     display: flex;
+    flex-direction: row;
     justify-content: space-around;
     align-items: center;
 }
 
 .fund-body-item {
-    width: 50%;
+    /* width: 50%; */
 }
 
 .fund-body-item-title {

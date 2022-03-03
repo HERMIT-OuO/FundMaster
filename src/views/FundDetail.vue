@@ -44,5 +44,6 @@ export default {
 <style scoped>
 .fund-chart {
     margin-top: 3rem;
+    margin-bottom: 10rem;
 }
 </style>

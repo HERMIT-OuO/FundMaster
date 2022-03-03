@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts">
-import { reactive, toRefs, onBeforeMount, onMounted } from "vue";
+// import { reactive, toRefs, onBeforeMount, onMounted } from "vue";
 import { useRouter } from "vue-router";
 export default {
     setup() {
@@ -26,6 +26,8 @@ export default {
 <style>
 
 html {
+    height: 100%;
+
     background-color: #f9f7f7;
 }
 

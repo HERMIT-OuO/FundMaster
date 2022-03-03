@@ -27,6 +27,15 @@
                     <v-chart :option="worth" style="height: 400px" />
                 </div>
             </el-card>
+
+        </div>
+        <div class="chart-item">
+            <el-card shadow="hover">
+                <!-- <div class="chart-item-title">历史净值</div> -->
+                <div class="char-item-body">
+                    <v-chart :option="totalNetWorthData" style="height: 400px" />
+                </div>
+            </el-card>
         </div>
     </div>
 </template>
@@ -50,9 +59,10 @@ interface DataProps {
     worth: any;
     fund: object;
     time: any;
-    dataList: any[];
+    dateList: any[];
     netWorthList: any[];
     netWorthList2: any[];
+    totalNetWorthData: any;
 }
 export default {
     name: "",
@@ -67,6 +77,18 @@ export default {
         const moment = require("moment");
         const data: DataProps = reactive({
             worth: {
+                visualMap: [
+                    {
+                        show: false,
+                        type: "continuous",
+                        seriesIndex: 0,
+                        min: 1,
+                        max: 2,
+                        // inRange: {
+                        //     color: ["#008000", "#f00"],
+                        // },
+                    },
+                ],
                 title: [
                     {
                         text: "历史单位净值",
@@ -74,7 +96,8 @@ export default {
                     },
                 ],
                 tooltip: {
-                    trigger: "item",
+                    // trigger: "item",
+                    trigger: "axis",
                 },
                 xAxis: {
                     type: "category",
@@ -87,30 +110,77 @@ export default {
                     {
                         type: "value",
                         name: "单位净值",
-                        splitNumber: 10,
+                        // splitNumber: 10,
                         position: "left",
                     },
-                    {
-                        type: "value",
-                        name: "净值涨幅",
-                        splitNumber: 10,
-                        position: "right",
-                        min: -1,
-                        max: 1,
-                        axisLabel: {
-                            formatter: "{value} %",
-                        },
-                    },
+                    // {
+                    //     type: "value",
+                    //     name: "净值涨幅",
+                    //     splitNumber: 10,
+                    //     position: "right",
+                    //     min: -1,
+                    //     max: 1,
+                    //     axisLabel: {
+                    //         formatter: "{value} %",
+                    //     },
+                    // },
                 ],
                 series: [
                     {
                         name: "单位净值",
                         type: "line",
+                        showSymbol: false,
                         data: [],
                     },
+                    // {
+                    //     name: "净值涨幅",
+                    //     type: "line",
+                    //     data: [],
+                    // },
+                ],
+            },
+            totalNetWorthData: {
+                visualMap: [
                     {
-                        name: "净值涨幅",
+                        show: false,
+                        type: "continuous",
+                        seriesIndex: 0,
+                        min: 1,
+                        max: 2,
+                        // inRange: {
+                        //     color: ["#008000", "#f00"],
+                        // },
+                    },
+                ],
+                title: [
+                    {
+                        text: "历史总净值",
+                        left: "center",
+                    },
+                ],
+                tooltip: {
+                    trigger: "axis",
+                },
+                xAxis: {
+                    type: "category",
+                    axisTick: {
+                        alignWithLabel: true,
+                    },
+                    data: [],
+                },
+                yAxis: [
+                    {
+                        type: "value",
+                        name: "总净值",
+                        // splitNumber: 10,
+                        position: "left",
+                    },
+                ],
+                series: [
+                    {
+                        name: "总净值",
                         type: "line",
+                        showSymbol: false,
                         data: [],
                     },
                 ],
@@ -118,21 +188,54 @@ export default {
             fund: {},
             time: [],
             locale: zhCn,
-            dataList: [],
-            netWorthList: [],
-            netWorthList2: [],
+            dateList: [],
+            netWorthList: [],   // 单位净值
+            netWorthList2: [],  // 净值增幅
+
         });
         onBeforeMount(() => {});
         onMounted(() => {
             const end = new Date();
             const start = new Date();
-            start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 365);
             data.time[0] = start;
             data.time[1] = end;
         });
         onBeforeUpdate(() => {
             handleSearch();
         });
+        const updateChart = (list: any) => {
+            // 更新图表
+            data.worth.xAxis.data = list.netWorthData.map((item: any) => {
+                return item[0];
+            });
+            data.worth.series[0].data = list.netWorthData.map((item: any) => {
+                return item[1];
+            });
+            data.worth.yAxis[0].max =
+                Math.max(...data.worth.series[0].data) + 0.01;
+            data.worth.visualMap[0].max =
+                Math.max(...data.worth.series[0].data) + 0.01;
+            data.worth.visualMap[0].min =
+                Math.min(...data.worth.series[0].data) - 0.01;
+            data.worth.yAxis[0].min =
+                Math.min(...data.worth.series[0].data) - 0.01;
+
+            data.totalNetWorthData.xAxis.data = list.totalNetWorthData.map((item: any) => {
+                return item[0];
+            });
+            data.totalNetWorthData.series[0].data = list.totalNetWorthData.map((item: any) => {
+                return item[1];
+            });
+            data.totalNetWorthData.yAxis[0].max =
+                Math.max(...data.totalNetWorthData.series[0].data) + 0.01;
+            data.totalNetWorthData.visualMap[0].max =
+                Math.max(...data.totalNetWorthData.series[0].data) + 0.01;
+            data.totalNetWorthData.visualMap[0].min =
+                Math.min(...data.totalNetWorthData.series[0].data) - 0.01;
+            data.totalNetWorthData.yAxis[0].min = Math.min(...data.totalNetWorthData.series[0].data) - 0.01;
+
+        };
         const handleSearch = () => {
             const _data = {
                 code: props.fundCode,
@@ -142,22 +245,10 @@ export default {
             getFundDetail(_data).then((res: any) => {
                 if (res.code === 200) {
                     data.fund = res.data;
-                    data.dataList = res.data.netWorthData.map((item: any) => {
+                    data.dateList = res.data.netWorthData.map((item: any) => {
                         return item[0];
                     });
-                    data.netWorthList = res.data.netWorthData.map(
-                        (item: any) => {
-                            return item[1];
-                        }
-                    );
-                    data.netWorthList2 = res.data.netWorthData.map(
-                        (item: any) => {
-                            return item[2];
-                        }
-                    );
-                    data.worth.xAxis.data = data.dataList;
-                    data.worth.series[0].data = data.netWorthList;
-                    data.worth.series[1].data = data.netWorthList2;
+                    updateChart(res.data);
                 } else {
                     ElMessage.error(res.message);
                 }
@@ -200,6 +291,24 @@ export default {
                     return [start, end];
                 },
             },
+                        {
+                text: "两年",
+                value: () => {
+                    const end = new Date();
+                    const start = new Date();
+                    start.setTime(start.getTime() - 3600 * 1000 * 24 * 365 * 2);
+                    return [start, end];
+                },
+            },
+            {
+                text: "三年",
+                value: () => {
+                    const end = new Date();
+                    const start = new Date();
+                    start.setTime(start.getTime() - 3600 * 1000 * 24 * 365 * 3);
+                    return [start, end];
+                },
+            }
         ];
         const refData = toRefs(data);
         return {
