@@ -6,7 +6,7 @@
 
 ## ScreenShot
 
-![FundMaster-Detail](.\img\FundMaster-Home.png)
+![FundMaster-Detail](./img/FundMaster-Home.png)
 
-![FundMaster-Detail](.\img\FundMaster-Detail.png)
+![FundMaster-Detail](./img/FundMaster-Detail.png)
 
