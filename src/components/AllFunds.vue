@@ -69,7 +69,7 @@
             </el-col>
         </el-row>
 
-        <div class="fund-chart-time">
+        <div class="fund-chart-time" v-if="funds.length > 0">
             <el-config-provider :locale="locale">
                 <el-date-picker
                     v-model="time"
