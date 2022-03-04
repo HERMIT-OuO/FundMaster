@@ -1,24 +1,12 @@
 # FundMaster
 
-## Project setup
-```
-yarn install
-```
+## Introduction
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+一个基于 Vue3 的基金管理工具~~（还算好看）~~，使用 [API](https://www.doctorxiong.club/api/)。
 
-### Compiles and minifies for production
-```
-yarn build
-```
+## ScreenShot
 
-### Lints and fixes files
-```
-yarn lint
-```
+![FundMaster-Detail](.\img\FundMaster-Home.png)
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+![FundMaster-Detail](.\img\FundMaster-Detail.png)
+
