@@ -108,18 +108,22 @@ import "element-plus/es/components/message/style/css";
 import { ElMessage } from "element-plus";
 import { Delete } from "@element-plus/icons-vue";
 import FundLineChart from "./FundLineChart.vue";
+import zhCn from "element-plus/es/locale/lang/zh-cn";
+import { ElConfigProvider } from "element-plus";
 
 interface DataProps {
     funds: any[];
     inputFund: string;
     stroage: any[];
     time: any[];
+    locale: any;
 }
 export default {
     name: "AllFunds",
     components: {
         Delete,
         FundLineChart,
+        ElConfigProvider,
     },
     setup() {
         const moment = require("moment");
@@ -129,6 +133,7 @@ export default {
             stroage: [],
             inputFund: "",
             time: [],
+            locale: zhCn,
         });
         const upOrDown = (num: number) => {
             return {
@@ -136,34 +141,36 @@ export default {
                 down: num < 0,
             };
         };
-        const querySearchAsync = (
-            queryString: string,
-            cb: (arg: any) => void
-        ) => {
-            const _data = {
-                keyWord: queryString,
-            };
-            getAllFund(_data).then((res: any) => {
-                if (res.code === 200) {
-                    let _res = [];
-                    for (let i = 0; i < res.data.length; i++) {
-                        _res.push({
-                            value: res.data[i][2] + "(" + res.data[i][0] + ")",
-                            id: res.data[i][0],
-                        });
-                        console.log(_res);
-                    }
-                    cb(res.data);
-                } else {
-                    cb([]);
-                }
-            });
-        };
+        // const querySearchAsync = (
+        //     queryString: string,
+        //     cb: (arg: any) => void
+        // ) => {
+        //     const _data = {
+        //         keyWord: queryString,
+        //     };
+        //     getAllFund(_data).then((res: any) => {
+        //         if (res.code === 200) {
+        //             let _res = [];
+        //             for (let i = 0; i < res.data.length; i++) {
+        //                 _res.push({
+        //                     value: res.data[i][2] + "(" + res.data[i][0] + ")",
+        //                     id: res.data[i][0],
+        //                 });
+        //                 console.log(_res);
+        //             }
+        //             cb(res.data);
+        //         } else {
+        //             cb([]);
+        //         }
+        //     });
+        // };
 
         const handleSelect = () => {};
         const handleAdd = () => {
             const _data = {
                 code: data.inputFund,
+                startDate: moment(data.time[0]).format("YYYY-MM-DD"),
+                endDate: moment(data.time[1]).format("YYYY-MM-DD"),
             };
             getFundDetail(_data).then((res: any) => {
                 if (res.code === 200) {
@@ -172,7 +179,9 @@ export default {
                     data.stroage.push(res.data.code);
                     setAllFunds(data.stroage);
                     ElMessage.success("添加成功");
+                    data.inputFund = '';
                 } else {
+                    data.inputFund = '';
                     ElMessage.error(res.message);
                 }
             });
@@ -250,11 +259,6 @@ export default {
         const handleSearch = () => {
             // 获取所有基金
             const _data = getAllFunds();
-            const end = new Date();
-            const start = new Date();
-            start.setTime(start.getTime() - 3600 * 1000 * 24 * 365);
-            data.time[0] = start;
-            data.time[1] = end;
             if (_data) {
                 data.stroage = _data;
                 const request = {
@@ -265,20 +269,25 @@ export default {
                 getFundDetailList(request).then((res: any) => {
                     if (res.code === 200) {
                         data.funds = res.data;
-                        console.log(res);
+                        // console.log(res);
                     }
                 });
             }
         };
         onBeforeMount(() => {});
         onMounted(() => {
+            const end = new Date();
+            const start = new Date();
+            start.setTime(start.getTime() - 3600 * 1000 * 24 * 365);
+            data.time[0] = start;
+            data.time[1] = end;
             handleSearch();
         });
         const refData = toRefs(data);
         return {
             ...refData,
             upOrDown,
-            querySearchAsync,
+            // querySearchAsync,
             handleSelect,
             handleAdd,
             goDetail,

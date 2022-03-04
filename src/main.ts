@@ -22,7 +22,8 @@ import {
     GridComponent,
     TooltipComponent,
     TitleComponent,
-    VisualMapComponent 
+    VisualMapComponent,
+    DataZoomComponent  
 } from 'echarts/components'
 
 
@@ -32,7 +33,8 @@ use([
     GridComponent,
     TooltipComponent,
     TitleComponent,
-    VisualMapComponent
+    VisualMapComponent,
+    DataZoomComponent 
 ])
 
 createApp(App).use(router).mount("#app");

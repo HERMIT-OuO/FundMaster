@@ -14,6 +14,7 @@ declare module 'vue' {
     ElRow: typeof import('element-plus/es')['ElRow']
     FundBar: typeof import('./src/components/FundBar.vue')['default']
     FundChart: typeof import('./src/components/FundChart.vue')['default']
+    FundLineChart: typeof import('./src/components/FundLineChart.vue')['default']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
   }
 }

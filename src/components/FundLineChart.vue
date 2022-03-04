@@ -2,7 +2,7 @@
 <template>
     <div class="fund-line-chart">
         <el-card shadow="hover"
-            ><v-chart :option="worth" style="margin-top:1rem; height: 400px;"
+            ><v-chart :option="worth" style="margin-top: 1rem; height: 400px"
         /></el-card>
     </div>
 </template>
@@ -14,6 +14,7 @@ import {
     onBeforeMount,
     onMounted,
     onBeforeUpdate,
+    watch,
 } from "vue";
 import VChart from "vue-echarts";
 import { getFundDetail } from "@/api/fund";
@@ -68,6 +69,13 @@ export default {
                         position: "left",
                     },
                 ],
+                dataZoom: [
+                    {
+                        type: "inside",
+                        start: 0,
+                        end: 100,
+                    },
+                ],
                 series: [
                     {
                         name: "单位净值",
@@ -85,9 +93,19 @@ export default {
         onMounted(() => {
             updateChart(props.fund);
         });
+        const watchFund = watch(
+            () => props.fund,
+            (newValue, oldValue) => {
+                // console.log("watchFund");
+                // console.log(newValue);
+                updateChart(newValue);
+            },
+            { deep: true }
+        );
         onBeforeUpdate(() => {});
         const updateChart = (list: any) => {
             // 更新图表
+            // console.log("执行了更新图表");
             data.worth.xAxis.data = list.netWorthData.map((item: any) => {
                 return item[0];
             });
@@ -97,17 +115,23 @@ export default {
             const max = Math.max(...data.worth.series[0].data);
             const min = Math.min(...data.worth.series[0].data);
 
-            data.worth.yAxis[0].max =
-                max + 0.01;
-            data.worth.visualMap[0].max =
-                max + 0.01;
-            data.worth.visualMap[0].min =
-                min - 0.01;
-            data.worth.yAxis[0].min =
-                min - 0.01;
-            data.worth.title[0].text = list.name + "（历史单位净值）";
+            data.worth.yAxis[0].max = (max + 0.01).toFixed(4);
+            data.worth.visualMap[0].max = max + 0.01;
+            data.worth.visualMap[0].min = min - 0.01;
+            data.worth.yAxis[0].min = (min - 0.01).toFixed(4);
 
-            const nowWorth = data.worth.series[0].data[-1];
+            const nowWorth =
+                data.worth.series[0].data[data.worth.series[0].data.length - 1];
+            const increase = nowWorth - data.worth.series[0].data[0];
+
+            data.worth.title[0].text =
+                list.name +
+                "（历史单位净值）  " +
+                data.worth.xAxis.data[0] +
+                " 至 " +
+                data.worth.xAxis.data[data.worth.series[0].data.length - 1] +
+                " 增长 " +
+                increase.toFixed(4);
         };
         const refData = toRefs(data);
         return {

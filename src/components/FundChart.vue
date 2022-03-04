@@ -27,13 +27,15 @@
                     <v-chart :option="worth" style="height: 400px" />
                 </div>
             </el-card>
-
         </div>
         <div class="chart-item">
             <el-card shadow="hover">
                 <!-- <div class="chart-item-title">历史净值</div> -->
                 <div class="char-item-body">
-                    <v-chart :option="totalNetWorthData" style="height: 400px" />
+                    <v-chart
+                        :option="totalNetWorthData"
+                        style="height: 400px"
+                    />
                 </div>
             </el-card>
         </div>
@@ -189,9 +191,8 @@ export default {
             time: [],
             locale: zhCn,
             dateList: [],
-            netWorthList: [],   // 单位净值
-            netWorthList2: [],  // 净值增幅
-
+            netWorthList: [], // 单位净值
+            netWorthList2: [], // 净值增幅
         });
         onBeforeMount(() => {});
         onMounted(() => {
@@ -212,29 +213,37 @@ export default {
             data.worth.series[0].data = list.netWorthData.map((item: any) => {
                 return item[1];
             });
-            data.worth.yAxis[0].max =
-                Math.max(...data.worth.series[0].data) + 0.01;
+            data.worth.yAxis[0].max = (
+                Math.max(...data.worth.series[0].data) + 0.01
+            ).toFixed(4);
             data.worth.visualMap[0].max =
                 Math.max(...data.worth.series[0].data) + 0.01;
             data.worth.visualMap[0].min =
                 Math.min(...data.worth.series[0].data) - 0.01;
-            data.worth.yAxis[0].min =
-                Math.min(...data.worth.series[0].data) - 0.01;
+            data.worth.yAxis[0].min = (
+                Math.min(...data.worth.series[0].data) - 0.01
+            ).toFixed(4);
 
-            data.totalNetWorthData.xAxis.data = list.totalNetWorthData.map((item: any) => {
-                return item[0];
-            });
-            data.totalNetWorthData.series[0].data = list.totalNetWorthData.map((item: any) => {
-                return item[1];
-            });
-            data.totalNetWorthData.yAxis[0].max =
-                Math.max(...data.totalNetWorthData.series[0].data) + 0.01;
+            data.totalNetWorthData.xAxis.data = list.totalNetWorthData.map(
+                (item: any) => {
+                    return item[0];
+                }
+            );
+            data.totalNetWorthData.series[0].data = list.totalNetWorthData.map(
+                (item: any) => {
+                    return item[1];
+                }
+            );
+            data.totalNetWorthData.yAxis[0].max = (
+                Math.max(...data.totalNetWorthData.series[0].data) + 0.01
+            ).toFixed(4);
             data.totalNetWorthData.visualMap[0].max =
                 Math.max(...data.totalNetWorthData.series[0].data) + 0.01;
             data.totalNetWorthData.visualMap[0].min =
                 Math.min(...data.totalNetWorthData.series[0].data) - 0.01;
-            data.totalNetWorthData.yAxis[0].min = Math.min(...data.totalNetWorthData.series[0].data) - 0.01;
-
+            data.totalNetWorthData.yAxis[0].min = (
+                Math.min(...data.totalNetWorthData.series[0].data) - 0.01
+            ).toFixed(4);
         };
         const handleSearch = () => {
             const _data = {
@@ -291,7 +300,7 @@ export default {
                     return [start, end];
                 },
             },
-                        {
+            {
                 text: "两年",
                 value: () => {
                     const end = new Date();
@@ -308,7 +317,7 @@ export default {
                     start.setTime(start.getTime() - 3600 * 1000 * 24 * 365 * 3);
                     return [start, end];
                 },
-            }
+            },
         ];
         const refData = toRefs(data);
         return {
