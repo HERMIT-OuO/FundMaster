@@ -2,7 +2,7 @@
 <template>
     <div class="fund-line-chart">
         <el-card shadow="hover"
-            ><v-chart :option="worth" style="margin-top: 1rem; height: 400px"
+            ><v-chart :option="worth" style="margin-top: 2rem; height: 400px"
         /></el-card>
     </div>
 </template>

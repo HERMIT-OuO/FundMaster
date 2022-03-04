@@ -380,7 +380,7 @@ export default {
     justify-content: center;
     align-items: center;
 
-    margin-top: 1rem;
+    margin-top: 2rem;
 }
 
 .fund-line-chart {

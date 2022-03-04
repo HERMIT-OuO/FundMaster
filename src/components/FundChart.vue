@@ -343,7 +343,7 @@ export default {
 }
 
 .chart-item {
-    margin-top: 3rem;
+    margin-top: 2rem;
     width: 100%;
 }
 
